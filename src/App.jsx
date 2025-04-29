@@ -1,7 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 
 
 const App = ()=>{
+
+const [fullName, setFullName] = useState('')
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+const [confirmPassword, setConfirmPassword] = useState('')
+const [error, setError] = useState('')
+
+
+
+
+
+const submitHandler = (e) =>{
+  e.preventDefault()
+
+  if(password.length<8){
+    setError('password must be 8 characters long')
+    return;
+  }
+
+  if(password != confirmPassword){
+    setError("password and setpassword must be same")
+    return;
+    }
+
+    if(!/[!@#$%^&*()<>,."]/.test(password)){
+      setError("password must contain special characters")
+      return;
+    }
+
+    if(!/[A-Z]/.test(password)){
+      setError("password must contain a uppercase character")
+      return;
+    }
+
+  setError('')
+  setFullName('')
+  setEmail('')
+  setPassword('')
+  setConfirmPassword('')
+  alert('form submitted')
+
+}
+
 
   return (
     <>
@@ -18,7 +61,10 @@ const App = ()=>{
               required
               name='fullName'
               placeholder="Enter Name here"
-              
+              value={fullName}
+              onChange={(e)=>{
+                setFullName(e.target.value)
+              }}
             />
             <input
               className="w-full border border-gray-300 px-4 py-2 text-sm rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
@@ -26,7 +72,10 @@ const App = ()=>{
               required
               placeholder="Enter Your Email"
               name='email'
-              
+              value={email}
+              onChange={(e)=>{
+                setEmail(e.target.value)
+              }}
             />
             <input
               className="w-full border border-gray-300 px-4 py-2 text-sm rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
@@ -34,7 +83,10 @@ const App = ()=>{
               required
               name='password'
               placeholder="Enter Password"
-              
+              value={password}
+              onChange={(e)=>{
+                setPassword(e.target.value)
+              }}
             />
             <input
             required
@@ -42,10 +94,17 @@ const App = ()=>{
               type="password"
               name='confirmPassword'
               placeholder="Confirm Password"
-              
+              value={confirmPassword}
+              onChange={(e)=>{
+                setConfirmPassword(e.target.value)
+              }}
             />
 
-          
+          {
+            error && (
+              <p className="text-red-500 font-medium text-base text-center">{error}</p>
+            )
+          }
             
             <button
               className="text-sm px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full mt-3"
