@@ -10,7 +10,7 @@ const [confirmPassword, setConfirmPassword] = useState('')
 const [error, setError] = useState('')
 
 
-
+const [users, setUsers] = useState([])
 
 
 const submitHandler = (e) =>{
@@ -35,6 +35,8 @@ const submitHandler = (e) =>{
       setError("password must contain a uppercase character")
       return;
     }
+
+    setUsers([...users,{fullName,email,password}])
 
   setError('')
   setFullName('')
@@ -136,9 +138,14 @@ const submitHandler = (e) =>{
 
       </div>
 
-      
+
     </div>
     
+      
+    {users.map(function(elem,idx){
+            return <div key={idx} className="bg-black text-white">{elem.fullName}</div>
+
+          })}
     </>
   )
 }
