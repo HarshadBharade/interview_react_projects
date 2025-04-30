@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
 
 const App = ()=>{
 
@@ -41,7 +41,18 @@ const submitHandler = (e) =>{
   setEmail('')
   setPassword('')
   setConfirmPassword('')
-  alert('form submitted')
+  
+  toast.success('Login Successfull!✔️', {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    
+    });
 
 }
 
@@ -118,6 +129,11 @@ const submitHandler = (e) =>{
           </p>
         </div>
         
+          <ToastContainer>
+
+          </ToastContainer>
+
+
       </div>
 
       
